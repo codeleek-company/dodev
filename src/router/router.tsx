@@ -10,7 +10,7 @@ import Projects from "@/pages/(user)/projects";
 import Ideas from "@/pages/(user)/ideas";
 import Roadmap from "@/pages/(user)/roadmap";
 import Login from "../pages/(auth)/login";
-import Nav from "@/components/nav";
+import Nav from "@/components/test";
 import Register from "@/pages/(auth)/register";
 import Homepage from "@/pages/(statics)/homepage";
 
