@@ -1,4 +1,6 @@
+/* eslint-disable no-var */
 import { createContext, useContext, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 type Theme = "dark" | "light" | "system";
 
@@ -20,7 +22,8 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
-export var globalSetTheme;
+// eslint-disable-next-line react-refresh/only-export-components
+export var globalSetTheme: Dispatch<SetStateAction<Theme>>;
 
 export function ThemeProvider({
   children,
@@ -67,6 +70,7 @@ export function ThemeProvider({
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 

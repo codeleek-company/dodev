@@ -1,18 +1,18 @@
+import "@/styles/main.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "@/styles/main.css";
-import Homepage from "@/pages/homepage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import Error from "./error-page";
 import Dashboard from "@/pages/(user)/dashboard";
-import { ThemeProvider } from "@/components/theme-provider";
 import Projects from "@/pages/(user)/projects";
 import Ideas from "@/pages/(user)/ideas";
-import { Toaster } from "@/components/ui/toaster";
 import Roadmap from "@/pages/(user)/roadmap";
 import Login from "../pages/(auth)/login";
 import Nav from "@/components/nav";
 import Register from "@/pages/(auth)/register";
+import Homepage from "@/pages/homepage";
 
 const router = createBrowserRouter([
   {
