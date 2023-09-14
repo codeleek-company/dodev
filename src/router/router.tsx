@@ -12,7 +12,7 @@ import Roadmap from "@/pages/(user)/roadmap";
 import Login from "../pages/(auth)/login";
 import Nav from "@/components/nav";
 import Register from "@/pages/(auth)/register";
-import Homepage from "@/pages/homepage";
+import Homepage from "@/pages/(statics)/homepage";
 
 const router = createBrowserRouter([
   {
