@@ -9,10 +9,12 @@ import Dashboard from "@/pages/(user)/dashboard";
 import Projects from "@/pages/(user)/projects";
 import Ideas from "@/pages/(user)/ideas";
 import Roadmap from "@/pages/(user)/roadmap";
-import Login from "../pages/(auth)/login";
+import Auth from "../pages/(auth)/auth";
 import Nav from "@/components/nav";
-import Register from "@/pages/(auth)/register";
+import Pricing from "@/pages/(auth)/pricing";
 import Homepage from "@/pages/(statics)/homepage";
+import Temp from "@/pages/(user)/temp";
+import Profile from "@/pages/(user)/profile";
 
 const router = createBrowserRouter([
   {
@@ -37,12 +39,20 @@ const router = createBrowserRouter([
     element: <Roadmap />,
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: "/dashboard/temp",
+    element: <Temp />,
   },
   {
-    path: "/register",
-    element: <Register />,
+    path: "/auth",
+    element: <Auth />,
+  },
+  {
+    path: "/pricing",
+    element: <Pricing />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 

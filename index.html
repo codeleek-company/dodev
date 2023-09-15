@@ -5,6 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loading</title>
+    <meta
+      name="og:description"
+      content="Dodev Task Manager is a tool specialized for developers to manage their projects, ideas, etc..."
+    />
+    <meta name="og:image" content="https://dodev.vercel.app/images/dodev.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,20 +17,12 @@
       rel="stylesheet"
     />
   </head>
-  <body style="margin: 0">
+  <body class="m-0">
     <div id="root">
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          font-size: 30px;
-          align-items: center;
-          height: 100vh;
-          font-family: 'cairo';
-          background-color: hsl(224 71.4% 4.1%);
-        "
-      >
-        Loading
+      <div class="flex h-screen w-full justify-center items-center">
+        <span
+          class="w-16 h-16 animate-spin rounded-full border-8 border-r-transparent border-black"
+        ></span>
       </div>
     </div>
     <script type="module" src="/src/router/router.tsx"></script>

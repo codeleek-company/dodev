@@ -4,11 +4,8 @@ export default function Error() {
   title("Not found");
 
   return (
-    <div className="flex justify-center items-center text-4xl flex-col gap-4 h-screen">
-      Not found
-      <a href="/" className="text-2xl p-2 bg-gray-500 px-4 rounded-lg">
-        Go back
-      </a>
+    <div className="flex justify-center items-center text-4xl flex-col gap-4 h-[80vh]">
+      404 | NOT FOUND
     </div>
   );
 }
