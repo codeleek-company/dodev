@@ -17,7 +17,7 @@ function RequireAuth({ children }: { children: ReactNode }) {
   return access ? (
     <div>{children}</div>
   ) : (
-    <Navigate to="/auth" replace={true} />
+    <Navigate to="/auth?message=Please+Login+First" replace={true} />
   );
 }
 

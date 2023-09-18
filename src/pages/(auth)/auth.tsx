@@ -18,7 +18,7 @@ interface SignUpPostForm extends HTMLElement {
 }
 
 import { useEffect, FormEvent, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import signInWithGoogle from "@/db/google";
 import { getAuth, signInWithPopup, GithubAuthProvider } from "firebase/auth";
 import handleError from "@/db/error-handler";
@@ -26,12 +26,14 @@ import Providers from "@/components/login-providers";
 
 export default function Auth() {
   const [access, setAccess] = useState(true);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       user ? setAccess(false) : "";
     });
-  }, []);
+    message(searchParams.get("message") as string);
+  }, [searchParams]);
 
   title("Auth");
 
