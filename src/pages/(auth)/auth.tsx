@@ -32,7 +32,9 @@ export default function Auth() {
     onAuthStateChanged(auth, (user) => {
       user ? setAccess(false) : "";
     });
-    message(searchParams.get("message") as string);
+    searchParams.get("message")
+      ? message(searchParams.get("message") as string)
+      : "";
   }, [searchParams]);
 
   title("Auth");
