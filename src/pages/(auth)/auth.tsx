@@ -18,9 +18,11 @@ interface SignUpPostForm extends HTMLElement {
 }
 
 import { useEffect, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import signInWithGoogle from "@/db/google";
-import signInWithGithub from "@/db/github";
+import { getAuth, signInWithPopup, GithubAuthProvider } from "firebase/auth";
+import handleError from "@/db/error-handler";
+import Providers from "@/components/login-providers";
 
 export default function Auth() {
   const [access, setAccess] = useState(true);
@@ -39,6 +41,24 @@ export default function Auth() {
     $("#message").innerHTML = context;
   }
 
+  const provider = new GithubAuthProvider();
+
+  function signInWithGithub() {
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        const token = (credential as { accessToken: string }).accessToken;
+        console.log(token);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        if (errorCode == "auth/account-exists-with-different-credential") {
+          message("Email exists");
+        }
+      });
+  }
+
   function signIn(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -51,9 +71,11 @@ export default function Auth() {
     console.log(mail, pwd);
 
     signInWithEmailAndPassword(auth, mail, pwd)
-      .then(() => window.location.replace("/"))
-      .catch((e) => {
-        message(e.message);
+      .then(() => setAccess(false))
+      .catch((error) => {
+        console.log(error.code);
+        message(handleError(error.code));
+        postForm.submit.innerHTML = "Sign in";
       });
   }
 
@@ -68,9 +90,11 @@ export default function Auth() {
     const pwd = postForm.pwd.value;
 
     createUserWithEmailAndPassword(auth, mail, pwd)
-      .then(() => window.location.replace("/"))
-      .catch((e) => {
-        message(e.message);
+      .then(() => setAccess(false))
+      .catch((error) => {
+        console.log(error.code);
+        message(handleError(error.code));
+        postForm.submit.innerHTML = "Sign up";
       });
   }
 
@@ -99,16 +123,10 @@ export default function Auth() {
               Sign in
             </Button>
           </form>
-          <div className="flex justify-evenly mt-4">
-            <img
-              src="/images/search.png"
-              className="p-2 border-white h-24 w-24 cursor-pointer"
-              alt="Google"
-            />
-            <img
-              src="/images/github.png"
-              className="p-2 border-black h-24 w-24 cursor-pointer"
-              alt="Github"
+          <div className="mt-6">
+            <Providers
+              signInWithGithub={signInWithGithub}
+              signInWithGoogle={signInWithGoogle}
             />
           </div>
         </TabsContent>
@@ -127,33 +145,23 @@ export default function Auth() {
               className="my-2"
               name="pwd"
             />
-            <Button className="w-full" name="submit">
+            <Button
+              className="w-full transition-all duration-300"
+              name="submit"
+            >
               Sign up
             </Button>
           </form>
-          <div className="grid grid-cols-2 gap-1 justify-evenly mt-4">
-            <Button
-              variant={"ghost"}
-              className="h-full"
-              onClick={signInWithGithub}
-            >
-              <img src="/images/github.png" alt="Github" width={60} />
-            </Button>
-            <Button
-              variant={"ghost"}
-              onClick={signInWithGoogle}
-              className="h-full"
-            >
-              <img src="/images/search.png" alt="Google" width={60} />
-            </Button>
+          <div className="mt-6">
+            <Providers
+              signInWithGithub={signInWithGithub}
+              signInWithGoogle={signInWithGoogle}
+            />
           </div>
         </TabsContent>
       </Tabs>
     </>
   ) : (
-    <div className="flex justify-center items-center h-[60vh] text-2xl flex-col">
-      No Access
-      <Link to="/">Homepage</Link>
-    </div>
+    <Navigate to="/dashboard" replace={true} />
   );
 }
