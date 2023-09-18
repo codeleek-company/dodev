@@ -48,7 +48,7 @@ export default function Nav() {
   }
 
   return (
-    <nav className="dark:bg-[#080f18] bg-[#eee]">
+    <nav className="dark:bg-[#080f18] bg-[#eee] h-[70px]">
       <div className="container flex justify-between items-center py-4">
         <Link to="/" className="text-2xl font-bold text-gold">
           DO
@@ -56,9 +56,6 @@ export default function Nav() {
         </Link>
         <NavigationMenu>
           <NavigationMenuList className="flex items-center gap-2">
-            <NavigationMenuItem>
-              <Link to="/dashboard">Dashboard</Link>
-            </NavigationMenuItem>
             <NavigationMenuItem>
               <Commander />
             </NavigationMenuItem>
