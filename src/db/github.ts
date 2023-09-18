@@ -10,10 +10,13 @@ export default function signInWithGithub() {
     .then((result) => {
       // This gives you a GitHub Access Token. You can use it to access the GitHub API.
       const credential = GithubAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+      const token = (credential as { accessToken: string }).accessToken;
 
+      console.log(token);
       // The signed-in user info.
       const user = result.user;
+
+      console.log(user);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
     })
@@ -23,9 +26,9 @@ export default function signInWithGithub() {
       const errorMessage = error.message;
       // The email of the user's account used.
       console.log(errorCode, errorMessage);
-      const email = error.customData.email;
+      // const email = error.customData.email;
       // The AuthCredential type that was used.
-      const credential = GithubAuthProvider.credentialFromError(error);
+      // const credential = GithubAuthProvider.credentialFromError(error);
       // ...
     });
 }
