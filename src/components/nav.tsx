@@ -1,52 +1,89 @@
+import { LogIn, User, MoonStar, Sun } from "lucide-react";
+import { Link } from "react-router-dom";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 
-import { MoonStar, Sun } from "lucide-react";
+import { auth } from "@/db/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Commander from "@/components/commander";
-import { globalSetTheme } from "./theme-provider";
+import { globalSetTheme } from "@/components/theme-provider";
 
 export default function Nav() {
-  const [light, changeLight] = useState(
-    localStorage.getItem("theme") == "light"
-  );
+  const [navData, setNavData] = useState({
+    lighted: localStorage.getItem("theme") == "light",
+    authed: false,
+  });
 
-  function setLight() {
-    globalSetTheme("light");
-    localStorage.setItem("theme", "light");
-    changeLight(true);
-  }
+  // const navData = {
+  //   lighted: true,
+  //   authed: false
+  // }
 
-  function setDark() {
-    globalSetTheme("dark");
-    localStorage.setItem("theme", "dark");
-    changeLight(false);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setNavData((prev) => {
+        return { ...prev, authed: !!user };
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    });
+  }, []);
+
+  function setTheme(theme: "light" | "dark") {
+    globalSetTheme(theme);
+    localStorage.setItem("theme", theme);
+    setNavData({
+      ...navData,
+      lighted: theme == "light",
+    });
   }
 
   return (
-    <nav className="dark:bg-[#01030670] bg-[#eee]">
+    <nav className="dark:bg-[#080f18] bg-[#eee]">
       <div className="container flex justify-between items-center py-4">
-        <a href="/" className="text-lg font-bold">
-          DoDev
-        </a>
+        <Link to="/" className="text-2xl font-bold text-gold">
+          DO
+          <span className="[-webkit-text-stroke:_2px_var(--gold)]">DEV</span>
+        </Link>
         <NavigationMenu>
           <NavigationMenuList className="flex items-center gap-2">
             <NavigationMenuItem>
-              <a href="/dashboard">Dashboard</a>
+              <Link to="/dashboard">Dashboard</Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Commander />
             </NavigationMenuItem>
             <NavigationMenuItem>
-              {light ? (
-                <MoonStar className="cursor-pointer" onClick={setDark} />
+              {navData.lighted ? (
+                <MoonStar
+                  className="cursor-pointer"
+                  onClick={() => setTheme("dark")}
+                />
               ) : (
-                <Sun className="cursor-pointer" onClick={setLight} />
+                <Sun
+                  className="cursor-pointer"
+                  onClick={() => setTheme("light")}
+                />
+              )}
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              {navData.authed ? (
+                <Link to="/profile">
+                  <User />
+                </Link>
+              ) : (
+                <Link to="/auth">
+                  <LogIn />
+                </Link>
               )}
             </NavigationMenuItem>
           </NavigationMenuList>

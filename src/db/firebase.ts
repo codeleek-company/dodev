@@ -1,18 +1,20 @@
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDRYQjQuByIaFSMHzgW7qegd9lf4XYGbUc",
-  authDomain: "dodev-13968.firebaseapp.com",
-  projectId: "dodev-13968",
-  storageBucket: "dodev-13968.appspot.com",
-  messagingSenderId: "865039891717",
-  appId: "1:865039891717:web:8e0ed4beec85b4aeeb0b6c",
-  measurementId: "G-1L5FJRQF2V",
+  apiKey: "AIzaSyBHEg9_6UZEjrD06UCZFHq1QllPGvjKOhg",
+  authDomain: "dodev-bbcc7.firebaseapp.com",
+  projectId: "dodev-bbcc7",
+  storageBucket: "dodev-bbcc7.appspot.com",
+  messagingSenderId: "915159720570",
+  appId: "1:915159720570:web:bfeda26e88334ff34391c3",
+  measurementId: "G-581EB094WN",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 export const db = getFirestore(app);
+export const colRef = collection(db, "ideas");
+
+export const auth = getAuth();

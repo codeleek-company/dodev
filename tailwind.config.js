@@ -8,7 +8,7 @@ export default {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "./index.html"
+    "./index.html",
   ],
   theme: {
     container: {
@@ -53,6 +53,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        gold: "var(--gold)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -72,6 +73,9 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      gridColumn: {
+        rmm: "repeat(auto-fit, minmax(200px, 1fr))",
       },
     },
   },

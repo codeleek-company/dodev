@@ -33,6 +33,9 @@
     --ring: 224 71.4% 4.1%;
 
     --radius: 0.5rem;
+
+    /* Gold theme */
+    --gold: #030712;
   }
 
   .dark {
@@ -63,6 +66,9 @@
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
     --ring: 216 12.2% 83.9%;
+
+    /* Gold theme */
+    --gold: #ffdf2b;
   }
 }
 
@@ -97,7 +103,15 @@ input:focus-visible {
 }
 
 h3 {
-  @apply font-medium text-lg;
+  @apply font-medium text-xl;
+}
+
+h2 {
+  @apply font-medium text-xl ps-2 pb-2;
+}
+
+h1 {
+  @apply font-bold text-5xl pb-2;
 }
 
 svg {
