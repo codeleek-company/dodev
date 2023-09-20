@@ -85,8 +85,7 @@ export default function Auth() {
           : message(
               "Please verify your email. <a onclick='message(12)'>Send email verification</a>",
               false
-            ),
-          sendEmailVerification(userCredential.user);
+            );
         postForm.submit.innerHTML = "Sign in";
       })
       .catch((error) => {
