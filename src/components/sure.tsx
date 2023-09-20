@@ -9,9 +9,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { ReactNode } from "react";
 
 interface Sure {
-  children: string;
+  children: ReactNode;
   alertDescription?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   continueFunc: any;

@@ -6,7 +6,10 @@ import $ from "@/utils/jquery";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "@/db/firebase";
 
@@ -29,8 +32,8 @@ export default function Auth() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      user ? setAccess(false) : "";
+    onAuthStateChanged(auth, () => {
+      // user ? setAccess(false) : "";
     });
     searchParams.get("message")
       ? message(searchParams.get("message") as string)
@@ -39,8 +42,10 @@ export default function Auth() {
 
   title("Auth");
 
-  function message(context: string) {
-    const messageClassName = "bg-red-600 rounded-md text-white p-3 my-2";
+  function message(context: string, warning = true) {
+    const messageClassName = `${
+      warning ? "bg-red-600" : "bg-blue-600"
+    } rounded-md text-white p-3 my-2`;
     $("#message").className = messageClassName;
     $("#message").innerHTML = context;
   }
@@ -72,10 +77,18 @@ export default function Auth() {
     const pwd = postForm.pwd.value;
     postForm.submit.innerHTML = "Loading...";
 
-    console.log(mail, pwd);
-
     signInWithEmailAndPassword(auth, mail, pwd)
-      .then(() => setAccess(false))
+      .then((userCredential) => {
+        // setAccess(false);
+        userCredential.user.emailVerified
+          ? setAccess(false)
+          : message(
+              "Please verify your email. <a onclick='message(12)'>Send email verification</a>",
+              false
+            ),
+          sendEmailVerification(userCredential.user);
+        postForm.submit.innerHTML = "Sign in";
+      })
       .catch((error) => {
         console.log(error.code);
         message(handleError(error.code));
@@ -89,17 +102,28 @@ export default function Auth() {
     const postForm = $("#sign-up") as SignUpPostForm;
 
     const mail = postForm.mail.value;
-    // const fullname = $("#sign-up").fullname.value;
+    const fullname = postForm.fullname.value;
     postForm.submit.innerHTML = "Loading...";
     const pwd = postForm.pwd.value;
 
-    createUserWithEmailAndPassword(auth, mail, pwd)
-      .then(() => setAccess(false))
-      .catch((error) => {
-        console.log(error.code);
-        message(handleError(error.code));
-        postForm.submit.innerHTML = "Sign up";
-      });
+    fullname
+      ? createUserWithEmailAndPassword(auth, mail, pwd)
+          .then((userCredential) => {
+            // setAccess(false)
+            // userCredential.user.sendEmailVerification()
+            sendEmailVerification(userCredential.user);
+            // auth.signOut()
+            updateProfile(userCredential.user, {
+              displayName: fullname,
+            });
+            signOut(auth);
+            postForm.submit.innerHTML = "Sign up";
+          })
+          .catch((error) => {
+            message(handleError(error.code));
+            postForm.submit.innerHTML = "Sign up";
+          })
+      : message("Please providor your fullname");
   }
 
   return access ? (
@@ -111,7 +135,7 @@ export default function Auth() {
         </TabsList>
         <TabsContent
           value="sign-in"
-          className="bg-muted w-[412px] m-auto mt-4 p-3 rounded-md"
+          className="bg-muted max-w-[412px] m-auto mt-4 p-3 rounded-md"
         >
           <h2>Sign in</h2>
           <form action="POST" id="sign-in" onSubmit={signIn}>
@@ -166,6 +190,13 @@ export default function Auth() {
       </Tabs>
     </>
   ) : (
-    <Navigate to="/dashboard" replace={true} />
+    <Navigate
+      to={
+        searchParams.get("redirect")
+          ? (searchParams.get("redirect") as string)
+          : "/dashboard"
+      }
+      replace={true}
+    />
   );
 }

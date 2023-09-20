@@ -1,5 +1,16 @@
-import { Card } from "@/components/card";
+import { Card, CardPar, CardTitle } from "@/components/card";
 import { PlusCircle } from "lucide-react";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogHeader,
+  DialogClose,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function Temp() {
   return (
@@ -10,15 +21,39 @@ export default function Temp() {
             console.log(e);
             return (
               <>
-                <h1>{e.id}</h1>
-                <h1>{e.name}</h1>
+                <Card>
+                  <CardTitle>{e.id}</CardTitle>
+                  <CardPar>{e.name}</CardPar>
+                </Card>
               </>
             );
           }
         )}
-        <Card className="flex justify-center cursor-pointer items-center h-[100px]">
-          <PlusCircle />
-        </Card>
+        <Dialog>
+          <DialogTrigger
+            id="new-idea"
+            className="text-center rounded-md w-full border p-4 transition-colors hover:bg-muted/50"
+          >
+            <PlusCircle width={30} height={30} />
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Add Temp</DialogTitle>
+              <DialogDescription>
+                <Input id="idea-name" placeholder="Idea" className="my-3" />
+                <Input id="idea-description" placeholder="Description" />
+              </DialogDescription>
+            </DialogHeader>
+            <Button
+              type="submit"
+              id="submit-idea"
+              onClick={() => alert("done")}
+            >
+              Confirm
+            </Button>
+            <DialogClose id="close-idea"></DialogClose>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );

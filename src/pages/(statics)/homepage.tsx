@@ -69,7 +69,7 @@ export default function Homepage() {
           <div className="flex gap-2">
             <a
               target="_blank"
-              href={`http://www.twitter.com/share?url=${dodevConfig.siteLink}`}
+              href={`http://www.twitter.com/intent/tweet?url=${dodevConfig.siteLink}`}
             >
               <Twitter className="cursor-pointer" />
             </a>
