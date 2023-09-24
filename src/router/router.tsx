@@ -22,6 +22,8 @@ import Homepage from "@/pages/(statics)/homepage";
 import Temp from "@/pages/(user)/temp";
 import Profile from "@/pages/(auth)/profile";
 import auth from "./require-auth";
+import Feed from "@/pages/(auth)/feed";
+import Resources from "@/pages/(user)/resources";
 
 const nav = (el: JSX.Element) => {
   return (
@@ -41,9 +43,11 @@ const router = createBrowserRouter(
       <Route path="/dashboard/temp" element={auth(<Temp />)} />
       <Route path="/dashboard/roadmap" element={auth(<Roadmap />)} />
       <Route path="/dashboard/projects" element={auth(<Projects />)} />
+      <Route path="/dashboard/resources" element={auth(<Resources />)} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/profile" element={auth(<Profile />)} />
       <Route path="/pricing" element={<Pricing />} />
+      <Route path="/feed" element={auth(<Feed />)} />
     </Route>
   )
 );

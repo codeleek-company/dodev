@@ -102,8 +102,10 @@ export default function Auth() {
 
     const mail = postForm.mail.value;
     const fullname = postForm.fullname.value;
-    postForm.submit.innerHTML = "Loading...";
     const pwd = postForm.pwd.value;
+
+    postForm.submit.innerHTML = "Loading...";
+    postForm.submit.disabled = true;
 
     fullname
       ? createUserWithEmailAndPassword(auth, mail, pwd)
@@ -116,13 +118,18 @@ export default function Auth() {
               displayName: fullname,
             });
             signOut(auth);
-            postForm.submit.innerHTML = "Sign up";
+            postForm.submit.innerHTML = "Check your inbox";
+            postForm.submit.disabled = true;
+            message("Email sent", false);
           })
           .catch((error) => {
             message(handleError(error.code));
             postForm.submit.innerHTML = "Sign up";
+            postForm.submit.disabled = false;
           })
-      : message("Please providor your fullname");
+      : message("Please providor your fullname"),
+      (postForm.submit.innerHTML = "Sign up"),
+      (postForm.submit.disabled = false);
   }
 
   return access ? (
