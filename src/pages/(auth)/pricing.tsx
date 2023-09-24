@@ -1,3 +1,3 @@
 export default function Pricing() {
-  return null;
+  return <div className="very-soon">Very soon</div>;
 }

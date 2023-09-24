@@ -36,9 +36,12 @@
 
     /* Gold theme */
     --gold: #030712;
+    --gold-foreground: white;
 
     /* Mine */
     --diff: #333;
+    --diff-foreground: white;
+    --muted-diff: #cdcfd3;
   }
 
   .dark {
@@ -72,9 +75,12 @@
 
     /* Gold theme */
     --gold: #ffdf2b;
+    --gold-foreground: black;
 
     /* Mine */
     --diff: #aaa;
+    --diff-foreground: black;
+    --muted-diff: #121821;
   }
 }
 
@@ -136,4 +142,8 @@ svg {
 
 .inline-link {
   @apply text-blue-500;
+}
+
+.very-soon {
+  @apply text-3xl flex justify-center items-center uppercase h-screen;
 }

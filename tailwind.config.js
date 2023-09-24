@@ -53,8 +53,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: "var(--gold)",
-        diff: "var(--diff)",
+        gold: {
+          DEFAULT: "var(--gold)",
+          foreground: "var(--gold-foreground)",
+        },
+        diff: {
+          DEFAULT: "var(--diff)",
+          foreground: "var(--diff-foreground)",
+        },
+        muted_diff: "var(--muted-diff)",
       },
       borderRadius: {
         lg: "var(--radius)",
