@@ -16,7 +16,7 @@ export default function Feature({
       </header>
       <div>
         <h3>{title}</h3>
-        <p className="dark:text-[#aaa] text-[#333]">{desc}</p>
+        <p className="text-diff">{desc}</p>
       </div>
     </div>
   );

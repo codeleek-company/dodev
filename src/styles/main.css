@@ -36,6 +36,9 @@
 
     /* Gold theme */
     --gold: #030712;
+
+    /* Mine */
+    --diff: #333;
   }
 
   .dark {
@@ -69,6 +72,9 @@
 
     /* Gold theme */
     --gold: #ffdf2b;
+
+    /* Mine */
+    --diff: #aaa;
   }
 }
 
