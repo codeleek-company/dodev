@@ -23,7 +23,9 @@ export default function Story({
       </div>
       <div>
         <h3 className="border-b-2 uppercase mb-2 border-[#666]">{title}</h3>
-        <p className="w-[300px] text-[#aaa] uppercase">{par}</p>
+        <p className="w-[300px] dark:text-[#aaa] text-[#333] uppercase">
+          {par}
+        </p>
       </div>
     </Link>
   );
