@@ -124,10 +124,14 @@ svg {
   display: inline-block;
 }
 
-.underlined {
+/* .underlined {
   @apply relative cursor-pointer
     after:absolute after:bottom-5 after:h-2 after:z-0 after:w-[calc(100%_-_8px)] after:bg-[#aaa] after:left-[4px]
     before:absolute before:bottom-5 before:h-2 before:z-10 before:w-0 before:duration-300 before:transition-all hover:before:w-[calc(100%_-_8px)] before:bg-[#666] before:left-[4px];
+} */
+
+.faded {
+  @apply text-[#aaa] opacity-25 scale-150;
 }
 
 .inline-link {
