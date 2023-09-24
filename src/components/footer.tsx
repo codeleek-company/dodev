@@ -1,0 +1,27 @@
+import { Copyright, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
+
+export default function Footer() {
+  return (
+    <div className="container p-3 bg-bar">
+      <div className="flex justify-evenly uppercase mt-2">
+        <Link to="/dashboard/projects">Projects</Link>
+        <Link to="/dashboard/ideas">Ideas</Link>
+        <Link to="/dashboard/resources">Resources</Link>
+        <Link to="/dashboard/roadmap">Roadmap</Link>
+      </div>
+      <div className="border-t-2 mt-5 pt-2 flex justify-between flex-wrap">
+        <span className="uppercase">
+          Copyrights <Copyright /> Osama Mohammed
+        </span>
+        {/* Links */}
+        <div className="flex gap-2">
+          <Twitter />
+          <Youtube />
+          <Facebook />
+          <Instagram />
+        </div>
+      </div>
+    </div>
+  );
+}
