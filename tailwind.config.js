@@ -62,6 +62,7 @@ export default {
           foreground: "var(--diff-foreground)",
         },
         muted_diff: "var(--muted-diff)",
+        bar: "var(--bar)",
       },
       borderRadius: {
         lg: "var(--radius)",

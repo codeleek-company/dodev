@@ -42,6 +42,7 @@
     --diff: #333;
     --diff-foreground: white;
     --muted-diff: #cdcfd3;
+    --bar: #eee;
   }
 
   .dark {
@@ -81,6 +82,7 @@
     --diff: #aaa;
     --diff-foreground: black;
     --muted-diff: #121821;
+    --bar: #080f18;
   }
 }
 
@@ -91,6 +93,10 @@
   body {
     @apply bg-background text-foreground min-h-screen [font-family:_'cairo'];
   }
+}
+
+.section {
+  @apply min-h-screen;
 }
 
 ::-webkit-scrollbar {

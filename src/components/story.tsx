@@ -14,12 +14,14 @@ export default function Story({
 }) {
   return (
     <Link
-      className="bg-muted p-3 block rounded-md w-fit dark:hover:opacity-90 hover:opacity-70 transition-all duration-300"
+      className="bg-muted block rounded-md w-fit hover:-translate-y-1 transition-all duration-300"
       to={link}
     >
       {/* Header */}
-      <div className="h-[200px] flex justify-center items-center ">{logo}</div>
-      <div>
+      <div className="h-[200px] rounded-t-md flex justify-center items-center bg-muted_diff">
+        {logo}
+      </div>
+      <div className="p-3">
         <h3 className="border-b-2 uppercase mb-2 border-[#666]">{title}</h3>
         <p className="min-w-[300px] text-diff uppercase">{par}</p>
       </div>

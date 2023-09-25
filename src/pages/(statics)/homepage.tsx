@@ -122,9 +122,9 @@ export default function Homepage() {
                 <>
                   Fast responses for the feed. If you have an issue or feature,
                   tell us now in{" "}
-                  <a href="/feed" className="inline-link">
+                  <Link to="/feed" className="inline-link">
                     [Dodev Feed]
-                  </a>
+                  </Link>
                 </>
               }
             />

@@ -133,7 +133,7 @@ export default function Auth() {
   }
 
   return access ? (
-    <>
+    <div className="min-h-screen">
       <Tabs defaultValue="sign-in" className="w-full pt-10">
         <TabsList className="max-w-[410px] m-auto grid [grid-template-columns:_repeat(auto-fit,_minmax(150px,_1fr))]">
           <TabsTrigger value="sign-in">Sign in</TabsTrigger>
@@ -194,7 +194,7 @@ export default function Auth() {
           </div>
         </TabsContent>
       </Tabs>
-    </>
+    </div>
   ) : (
     <Navigate
       to={

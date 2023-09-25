@@ -1,8 +1,11 @@
 import Suggestion from "@/components/suggestion";
+import title from "@/utils/title";
 
 export default function Feed() {
+  title("Feed");
+
   return (
-    <div className="container mt-2 mb-20">
+    <div className="section container mt-2 mb-20">
       <Suggestion
         desc="Some desc"
         title="Test"

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className="bg-bar">
       <div className="container p-3">
-        <div className="flex justify-evenly uppercase mt-2 text-[#aaa]">
+        <div className="flex justify-evenly uppercase mt-2">
           <Link to="/dashboard/projects">Projects</Link>
           <Link to="/dashboard/ideas">Ideas</Link>
           <Link to="/dashboard/resources">Resources</Link>

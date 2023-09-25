@@ -39,7 +39,7 @@ export default function Ideas() {
   }, []);
 
   return (
-    <div className="container mx-auto py-10 relative">
+    <div className="container section mx-auto py-10 relative">
       <DataTable columns={columns} data={data} />
     </div>
   );

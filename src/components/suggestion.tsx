@@ -38,7 +38,7 @@ Suggestion) {
         >
           {state}
         </span>
-        <span className="bg-diff px-4 rounded-r-full uppercase text-diff-foreground">
+        <span className="bg-muted_diff px-4 rounded-r-full uppercase">
           {title}
         </span>
       </h3>

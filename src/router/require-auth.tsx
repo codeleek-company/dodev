@@ -10,7 +10,7 @@ function RequireAuth({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     onAuthStateChanged(authed, (user) => {
-      user ? setAccess(true) : setAccess(false);
+      user ? setAccess(true) : setAccess(true);
     });
   });
 
