@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 // import { Button } from "@/components/ui/button";
 import title from "@/utils/title";
-import { X } from "lucide-react";
+import { ArrowRightCircle } from "lucide-react";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 type Idea = {
@@ -14,22 +14,52 @@ type Idea = {
 // eslint-disable-next-line no-var, react-refresh/only-export-components
 export var stater: Dispatch<SetStateAction<Idea[]>>;
 
+// ================================================ Idea actions ================================================ \\
+function backspaceOrEnter(
+  index: number,
+  e: Event | undefined,
+  state: typeof stater
+) {
+  if (
+    (e as KeyboardEvent).key == "Backspace" &&
+    (e?.target as HTMLElement).innerHTML == ""
+  )
+    deleteIdea(index, state);
+  if ((e as KeyboardEvent).key == "Enter") {
+    e?.preventDefault();
+    // createIdea(state);
+  }
+}
+
 function update(index: number, e: Event | undefined) {
   const ideas = JSON.parse(localStorage.getItem("ideas") as string);
   ideas[index].name = (e?.target as HTMLParagraphElement).innerHTML;
   localStorage.setItem("ideas", JSON.stringify(ideas));
 }
 
-function deleteIdea(index: number, d) {
+function deleteIdea(index: number, state: typeof stater) {
   let ideas = JSON.parse(localStorage.getItem("ideas") as string);
   ideas = ideas.filter((idea: Idea) => idea != ideas[index]);
-  d(ideas);
+  state(ideas);
   localStorage.setItem("ideas", JSON.stringify(ideas));
   console.log(index);
 }
 
-const defaultIdea = [{ name: "Get started", tags: ["new"] }];
 const newIdea = { name: "Idea ✨", tags: [] };
+function createIdea(state: typeof stater) {
+  const newData = [
+    ...JSON.parse(localStorage.getItem("ideas") as string),
+    newIdea,
+  ];
+  state(newData);
+  localStorage.setItem("ideas", JSON.stringify(newData));
+}
+
+// function createProject() {}
+
+function moveToDevelopment() {}
+
+const defaultIdea = [{ name: "Get started", tags: ["new"] }];
 
 export default function Ideas() {
   title("Ideas");
@@ -60,11 +90,12 @@ export default function Ideas() {
               <div className="my-2 inline-flex justify-between">
                 <p
                   onKeyUp={() => update(index, event)}
-                  className="focus:outline-0"
+                  onKeyDown={() => backspaceOrEnter(index, event, stater)}
+                  className="focus:outline-0 max-w-sm"
                   contentEditable={true}
                   suppressContentEditableWarning={false}
                 >
-                  {idea.name || "..."}
+                  {idea.name}
                 </p>
                 <div className="flex gap-2">
                   {idea.tags.map((tag) => {
@@ -72,10 +103,9 @@ export default function Ideas() {
                   })}
                 </div>
               </div>
-              <X
-                onClick={() => deleteIdea(index, setData)}
-                className="ms-4 cursor-pointer"
-                color="#955"
+              <ArrowRightCircle
+                className="cursor-pointer"
+                onClick={moveToDevelopment}
               />
             </div>
             <hr />
@@ -83,18 +113,7 @@ export default function Ideas() {
         );
       })}
       <div className="my-2">
-        <Button
-          onClick={() => {
-            const newData = [
-              ...JSON.parse(localStorage.getItem("ideas") as string),
-              newIdea,
-            ];
-            setData(newData);
-            localStorage.setItem("ideas", JSON.stringify(newData));
-          }}
-        >
-          Add new...
-        </Button>
+        <Button onClick={() => createIdea(setData)}>Add new...</Button>
       </div>
     </div>
   );
