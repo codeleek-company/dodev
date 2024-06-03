@@ -69,8 +69,9 @@ export default function Ideas() {
       <div className="my-2">
         <Button
           onClick={() => {
-            setData([...data, newIdea]);
-            localStorage.setItem("ideas", JSON.stringify(data));
+            const newData = [...data, newIdea];
+            setData(newData);
+            localStorage.setItem("ideas", JSON.stringify(newData));
           }}
         >
           Add new...
