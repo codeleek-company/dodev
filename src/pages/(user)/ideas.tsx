@@ -1,30 +1,26 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
 // import { Button } from "@/components/ui/button";
-import { Idea, columns } from "@/components/ui/columns";
-import { DataTable } from "@/components/ui/data-table";
 import title from "@/utils/title";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
+
+type Idea = {
+  name: string;
+  tags: string[];
+};
 
 // eslint-disable-next-line no-var, react-refresh/only-export-components
 export var stater: Dispatch<SetStateAction<Idea[]>>;
 
-// eslint-disable-next-line react-refresh/only-export-components
-export function saveIdea(idea: Idea, backward = false, liveAdd = false) {
-  let ideas: Idea[] = JSON.parse(localStorage.getItem("ideas") as string);
-
-  backward
-    ? (ideas = ideas.filter((e) => e.id !== idea.id))
-    : ideas.push({
-        id: idea.id,
-        name: idea.name,
-        description: idea.description,
-      });
-
+function update(index: number, e: Event | undefined) {
+  const ideas = JSON.parse(localStorage.getItem("ideas") as string);
+  ideas[index].name = (e?.target as HTMLParagraphElement).innerHTML;
   localStorage.setItem("ideas", JSON.stringify(ideas));
-
-  liveAdd ? stater(ideas) : "";
-
-  return ideas;
 }
+
+const defaultIdea = [{ name: "Get started", tags: ["new"] }];
+const newIdea = { name: "Idea ✨", tags: [] };
 
 export default function Ideas() {
   title("Ideas");
@@ -33,14 +29,53 @@ export default function Ideas() {
   stater = setData;
 
   useEffect(() => {
-    localStorage.getItem("ideas")
-      ? setData(JSON.parse(localStorage.getItem("ideas") as string))
-      : localStorage.setItem("ideas", JSON.stringify([]));
+    const localStorageIdeas = localStorage.getItem("ideas");
+    if (localStorageIdeas && JSON.parse(localStorageIdeas))
+      setData(JSON.parse(localStorageIdeas));
+    else
+      localStorage.setItem("ideas", JSON.stringify(defaultIdea)),
+        setData(defaultIdea);
   }, []);
 
   return (
     <div className="container section mx-auto py-10 relative">
-      <DataTable columns={columns} data={data} />
+      <div className="flex justify-between mb-2">
+        <span>Name</span>
+        <span>Tags</span>
+      </div>
+      <hr />
+      {data.map((idea, index) => {
+        return (
+          <>
+            <div className="my-2 flex justify-between">
+              <p
+                onKeyUp={() => update(index, event)}
+                className="focus:outline-0"
+                contentEditable={true}
+                suppressContentEditableWarning={false}
+              >
+                {idea.name || "..."}
+              </p>
+              <div className="flex gap-2">
+                {idea.tags.map((tag) => {
+                  return <span>{tag}</span>;
+                })}
+              </div>
+            </div>
+            <hr />
+          </>
+        );
+      })}
+      <div className="my-2">
+        <Button
+          onClick={() => {
+            setData([...data, newIdea]);
+            localStorage.setItem("ideas", JSON.stringify(data));
+          }}
+        >
+          Add new...
+        </Button>
+      </div>
     </div>
   );
 }
