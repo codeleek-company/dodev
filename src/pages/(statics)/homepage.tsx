@@ -1,5 +1,4 @@
 import ArrowButton from "@/components/arrow-button";
-import { Button } from "@/components/ui/button";
 import { auth } from "@/db/firebase";
 import title from "@/utils/title";
 import { onAuthStateChanged } from "firebase/auth";
@@ -8,16 +7,14 @@ import {
   Facebook,
   FastForward,
   LayoutDashboard,
-  Lightbulb,
   Maximize2Icon,
   Twitter,
-  Users2,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import dodevConfig from "@/config";
 import { toast } from "@/utils/use-toast";
-import Feature from "@/components/feature";
+import Feature from "@/pages/(statics)/feature";
 import ToolTip from "@/components/tooltip";
 
 export default function Homepage() {
@@ -75,10 +72,7 @@ export default function Homepage() {
         </div>
         <div className="absolute bottom-0 left-0 right-0">
           <div className="container flex items-center justify-between py-2">
-            <Button variant={"ghost"}>
-              Share your feed <Lightbulb />
-            </Button>
-            {/* Links to share */}
+            {/* Share site */}
             <div className="flex gap-2">
               <ToolTip hoverP="Twitter">
                 <a
@@ -113,20 +107,7 @@ export default function Homepage() {
             <Feature
               icon={<FastForward />}
               title="Speed"
-              desc="Dodev offers very high speed in this website. Because of the consistance maintainace of issues and anything that slows the website"
-            />
-            <Feature
-              icon={<Users2 />}
-              title="Community"
-              desc={
-                <>
-                  Fast responses for the feed. If you have an issue or feature,
-                  tell us now in{" "}
-                  <Link to="/feed" className="inline-link">
-                    [Dodev Feed]
-                  </Link>
-                </>
-              }
+              desc="Dodev offers very high speed in this website. Because of the consistance maintainace of issues."
             />
             <Feature
               icon={<Maximize2Icon />}

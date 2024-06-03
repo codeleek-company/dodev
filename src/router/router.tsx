@@ -22,7 +22,6 @@ import Homepage from "@/pages/(statics)/homepage";
 import Temp from "@/pages/(user)/temp";
 import Profile from "@/pages/(auth)/profile";
 import auth from "@/router/require-auth";
-import Feed from "@/pages/(auth)/feed";
 import Resources from "@/pages/(user)/resources";
 import Footer from "@/components/footer";
 
@@ -53,7 +52,6 @@ const router = createBrowserRouter(
       <Route path="/auth" element={<Auth />} />
       <Route path="/profile" element={auth(<Profile />)} />
       <Route path="/pricing" element={<Pricing />} />
-      <Route path="/feed" element={auth(<Feed />)} />
     </Route>
   )
 );

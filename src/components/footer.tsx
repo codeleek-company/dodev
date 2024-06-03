@@ -12,7 +12,7 @@ export default function Footer() {
           <Link to="/dashboard/roadmap">Roadmap</Link>
         </div>
         <div className="border-t-2 mt-5 pt-2 flex justify-between flex-wrap">
-          <span className="uppercase dark:text-[#999] text-[#333] text-lg">
+          <span className="dark:text-[#999] text-[#333] text-lg">
             Copyrights <Copyright /> Osama Mohammed
           </span>
           {/* Links */}
