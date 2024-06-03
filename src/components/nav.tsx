@@ -12,7 +12,6 @@ import { onAuthStateChanged } from "firebase/auth";
 
 import { useEffect, useState } from "react";
 
-import Commander from "@/components/commander";
 import { globalSetTheme } from "@/components/theme-provider";
 
 export default function Nav() {
@@ -56,9 +55,6 @@ export default function Nav() {
         </Link>
         <NavigationMenu>
           <NavigationMenuList className="flex items-center gap-2">
-            <NavigationMenuItem>
-              <Commander />
-            </NavigationMenuItem>
             <NavigationMenuItem>
               {navData.lighted ? (
                 <MoonStar
