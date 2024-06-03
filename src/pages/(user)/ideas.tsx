@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 // import { Button } from "@/components/ui/button";
 import title from "@/utils/title";
+import { X } from "lucide-react";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 type Idea = {
@@ -17,6 +18,14 @@ function update(index: number, e: Event | undefined) {
   const ideas = JSON.parse(localStorage.getItem("ideas") as string);
   ideas[index].name = (e?.target as HTMLParagraphElement).innerHTML;
   localStorage.setItem("ideas", JSON.stringify(ideas));
+}
+
+function deleteIdea(index: number, d) {
+  let ideas = JSON.parse(localStorage.getItem("ideas") as string);
+  ideas = ideas.filter((idea: Idea) => idea != ideas[index]);
+  d(ideas);
+  localStorage.setItem("ideas", JSON.stringify(ideas));
+  console.log(index);
 }
 
 const defaultIdea = [{ name: "Get started", tags: ["new"] }];
@@ -47,20 +56,27 @@ export default function Ideas() {
       {data.map((idea, index) => {
         return (
           <>
-            <div className="my-2 flex justify-between">
-              <p
-                onKeyUp={() => update(index, event)}
-                className="focus:outline-0"
-                contentEditable={true}
-                suppressContentEditableWarning={false}
-              >
-                {idea.name || "..."}
-              </p>
-              <div className="flex gap-2">
-                {idea.tags.map((tag) => {
-                  return <span>{tag}</span>;
-                })}
+            <div className="flex items-center justify-between">
+              <div className="my-2 inline-flex justify-between">
+                <p
+                  onKeyUp={() => update(index, event)}
+                  className="focus:outline-0"
+                  contentEditable={true}
+                  suppressContentEditableWarning={false}
+                >
+                  {idea.name || "..."}
+                </p>
+                <div className="flex gap-2">
+                  {idea.tags.map((tag) => {
+                    return <span>{tag}</span>;
+                  })}
+                </div>
               </div>
+              <X
+                onClick={() => deleteIdea(index, setData)}
+                className="ms-4 cursor-pointer"
+                color="#955"
+              />
             </div>
             <hr />
           </>
@@ -69,7 +85,10 @@ export default function Ideas() {
       <div className="my-2">
         <Button
           onClick={() => {
-            const newData = [...data, newIdea];
+            const newData = [
+              ...JSON.parse(localStorage.getItem("ideas") as string),
+              newIdea,
+            ];
             setData(newData);
             localStorage.setItem("ideas", JSON.stringify(newData));
           }}

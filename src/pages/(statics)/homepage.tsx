@@ -60,7 +60,7 @@ export default function Homepage() {
           <h3 className="uppercase m-auto text-5xl faded w-fit my-20 pb-6">
             Features
           </h3>
-          <div className="grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] justify-center gap-6 py-2">
+          <div className="grid grid-cols-[repeat(auto-fit,_minmax(300px,_380px))] justify-center gap-6 py-2">
             <Feature
               icon={<FastForward />}
               title="Speed"
