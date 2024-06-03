@@ -6,7 +6,7 @@ export default function Dashboard() {
   title("Dashboard");
 
   return (
-    <div className="container my-2 mb-20 grid gap-3 grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] justify-center">
+    <div className="container my-10 mb-20 grid gap-3 grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] justify-center">
       <Story
         par="Note now your ideas. Maybe moving them to developement later on..."
         link="/dashboard/ideas"

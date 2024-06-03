@@ -23,14 +23,14 @@ import Temp from "@/pages/(user)/temp";
 import Profile from "@/pages/(auth)/profile";
 import auth from "@/router/require-auth";
 import Resources from "@/pages/(user)/resources";
-import Footer from "@/components/footer";
+// import Footer from "@/components/footer";
 
 const outline = (el: JSX.Element) => {
   return (
     <>
       <Nav />
       {el}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
