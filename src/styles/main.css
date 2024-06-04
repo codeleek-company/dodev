@@ -153,3 +153,10 @@ svg {
 .very-soon {
   @apply text-3xl flex justify-center items-center uppercase h-screen;
 }
+
+.wave-bottom {
+  position: absolute !important;
+  bottom: 0;
+  height: 200px !important;
+  width: 100% !important;
+}

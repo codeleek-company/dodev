@@ -51,8 +51,8 @@ export default function Homepage() {
               </Link>
             </div>
           </div>
-          {/* Landing page Footer */}
         </div>
+        <img className="wave-bottom" src="/images/wave.png" />
       </section>
       {/* Features */}
       <section className="dark:bg-gray-900 bg-gray-200 min-h-screen py-6">
