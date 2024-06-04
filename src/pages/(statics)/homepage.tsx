@@ -19,37 +19,48 @@ export default function Homepage() {
 
   return (
     <>
-      <section className="mt-20 h-[calc(100vh_-_150px)]">
-        <div className="h-[60vh] container">
+      <section className="sm:mt-20 mt-6 sm:min-h-[calc(100vh_-_150px)] min-h-screen relative">
+        <div className="container">
           <div className="">
-            <h1 className=" text-gold">
-              DO
-              <span className="[-webkit-text-stroke:_2px_var(--gold)] text-transparent">
-                DEV
-              </span>
+            <h1 className="max-w-prose">
+              Dodev empowers developers to transform their{" "}
+              <span className="text-gold underline">ideas</span> into{" "}
+              <span className="text-gold underline">reality</span>
             </h1>
-            <p className="text-2xl [font-family:_monospace]">
-              Start your new journey with dodev to handle your tasks and
-              projects
-            </p>
-            <div className="flex my-8 gap-4 flex-wrap">
-              {authed ? (
+            {authed ? (
+              <>
+                <p className="max-w-prose text-xl py-4 text-muted-foreground">
+                  Don't ignore ideas, <b>cultivate them!</b> Convert those
+                  sparks of inspiration into actionable plans.
+                </p>
                 <Link to="/dashboard">
-                  <ArrowButton size="xl" variant="defaultOutline">
+                  <ArrowButton size="lg" variant="defaultOutline">
                     Dashboard
                   </ArrowButton>
                 </Link>
-              ) : (
+              </>
+            ) : (
+              <>
+                <p className="max-w-prose text-xl py-4 text-muted-foreground">
+                  Sign up for Dodev and unleash the power of AI-driven
+                  development planning. And create your first idea.
+                </p>
                 <Link to="/auth">
-                  <ArrowButton size="xl" variant="defaultOutline">
-                    Sign up
+                  <ArrowButton
+                    className="me-2 mb-2"
+                    size="lg"
+                    variant="defaultOutline"
+                  >
+                    Sign in
                   </ArrowButton>
                 </Link>
-              )}
-              <Link to="/pricing">
-                <ArrowButton size="xl">Get an offer</ArrowButton>
-              </Link>
-            </div>
+                <Link to="/auth">
+                  <ArrowButton size="lg" variant="default">
+                    Create an account
+                  </ArrowButton>
+                </Link>
+              </>
+            )}
           </div>
         </div>
         <img className="wave-bottom" src="/images/wave.png" />
