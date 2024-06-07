@@ -32,8 +32,8 @@ export default function Auth() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    onAuthStateChanged(auth, () => {
-      // user ? setAccess(false) : "";
+    onAuthStateChanged(auth, (user) => {
+      user ? setAccess(false) : "";
     });
     searchParams.get("message")
       ? message(searchParams.get("message") as string)
