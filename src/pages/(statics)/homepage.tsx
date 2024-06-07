@@ -21,30 +21,23 @@ export default function Homepage() {
     <>
       <section className="sm:mt-20 mt-6 sm:min-h-[calc(100vh_-_150px)] min-h-screen relative">
         <div className="container">
-          <div className="">
-            <h1 className="max-w-prose">
-              Dodev empowers developers to transform their{" "}
-              <span className="text-gold underline">ideas</span> into{" "}
-              <span className="text-gold underline">reality</span>
+          <div>
+            <h1>
+              Dodev: Unlock Your{" "}
+              <span className="text-gold underline">Potential</span>
             </h1>
+            <p className="max-w-prose text-xl py-4 text-muted-foreground">
+              Don't let your brilliant ideas flicker and fade. Capture them and
+              turn your next million-dollar thought into reality.
+            </p>
             {authed ? (
-              <>
-                <p className="max-w-prose text-xl py-4 text-muted-foreground">
-                  Don't ignore ideas, <b>cultivate them!</b> Convert those
-                  sparks of inspiration into actionable plans.
-                </p>
-                <Link to="/dashboard">
-                  <ArrowButton size="lg" variant="defaultOutline">
-                    Dashboard
-                  </ArrowButton>
-                </Link>
-              </>
+              <Link to="/dashboard">
+                <ArrowButton size="lg" variant="defaultOutline">
+                  Dashboard
+                </ArrowButton>
+              </Link>
             ) : (
               <>
-                <p className="max-w-prose text-xl py-4 text-muted-foreground">
-                  Sign up for Dodev and unleash the power of AI-driven
-                  development planning. And create your first idea.
-                </p>
                 <Link to="/auth">
                   <ArrowButton
                     className="me-2 mb-2"
